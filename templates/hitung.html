@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ilmu Aktuaria</title>
+  <!-- AdminLTE CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card-header {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .main-footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    .content-header {
+      background-color: #0a3e75;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .centered-form {
+      margin: 50px auto;
+      max-width: 600px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #053b75;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result-section {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .result-item {
+      flex: 1;
+      margin-right: 2%;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .result-item:last-child {
+      margin-right: 0;
+    }
+    .result-table {
+      width: 100%;
+    }
+    .result-table caption {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .result-table tbody td {
+      padding: 10px;
+    }
+
+    .main-footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      .result-item {
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+  </style>
+
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <img src="{{ url_for('static', filename='images/aktuaria.png') }}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">ILMU AKTUARIA</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Perhitungan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Widgets
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Perhitungan Aktuaria</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+              <li class="breadcrumb-item active">Perhitungan</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Perhitungan -->
+    <div class="centered-form">
+      <form method="POST" action="/hitung">
+        <div class="form-group">
+          <h7 style="margin-left: 5px;">k :</h7>
+          <input type="text" placeholder="Proporsi Gaji (%)" name="k_percent" required>
+        </div>
+        <div class="form-group">
+          <h7 style="margin-left: 5px;">i :</h7>
+          <input type="text" placeholder="Suku Bunga (%)" name="i" required>
+        </div>
+        <div class="form-group">
+          <h7 style="margin-left: 5px;">y :</h7>
+          <input type="text" placeholder="Usia Masuk Peserta Dana Pensiun" name="y" required>
+        </div>
+        <div class="form-group">
+          <h7 style="margin-left: 5px;">x :</h7>
+          <input type="text" placeholder="Usia Valuasi" name="x" required>
+        </div>
+        <div class="form-group">
+          <h7 style="margin-left: 5px;">r :</h7>
+          <input type="text" placeholder="Usia Pensiun Normal" name="r" required>
+        </div>
+        <div class="form-group mb-4">
+          <h7 style="margin-left: 5px;">s<sub>r-1</sub> :</h7>
+          <input type="text" placeholder="Besar Gaji Selama Setahun Terakhir (Rp)" name="sr_minus_1" required>
+        </div>
+        <input type="submit" name="calculate_pvfb" value="Hitung">
+      </form>
+    </div>
+    <!-- Hasil Perhitungan -->
+    <h3 style="margin-top: 50px; text-align: center;">Hasil Perhitungan Menggunakan Projected Unit Credit</h3>
+    <div class="result-tables" style="margin-top: 20px;">
+      <div style="display: flex; justify-content: space-between;">
+        <div style="flex: 1; margin-left: 25px; margin-left: 50px;">
+          <table class="result-table" style="border-collapse: collapse; width: 100%;">
+            <thead>
+              <tr style="background-color: #f8f9fa;">
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: center;"><b>Usia</b></th>
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: center;"><b>Iuran Normal (NC)</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% set normal_contributions_items = normal_contributions.items() %}
+              {% for age, normal_contribution in normal_contributions_items if age != 'Total' %}
+              <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ age }}</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ normal_contribution|format_as_currency }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div style="flex: 1; margin-left: 25px; margin-right: 50px;">
+          <table class="result-table" style="border-collapse: collapse; width: 100%;">
+            <thead>
+              <tr style="background-color: #f8f9fa;">
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: center;"><b>Usia</b></th>
+                <th style="border: 1px solid #ddd; padding: 10px; text-align: center;"><b>Kewajiban Aktuaria (AL)</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% set pensiun_benefits_items = pensiun_benefits.items() %}
+              {% for age, pensiun_benefits in pensiun_benefits_items if age != 'Total' %}
+              <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ age }}</td>
+                <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">{{ pensiun_benefits|format_as_currency }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <!-- Default to the left -->
+    <strong>Website &copy; 2024</strong>
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/js/adminlte.min.js"></script>
+</body>
+</html>
